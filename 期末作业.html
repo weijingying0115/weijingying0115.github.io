@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>第五题</title>
+  <style type="text/css"> 
+  body{
+  margin:0;
+  cursor:pointer;
+  }
+  div{
+  background-color:green;
+  box-sizing: border-box;
+  border:1px solid green;
+  border-radius:50%;
+  margin:0;
+  padding:0;
+  position:absolute;
+  transition:all 0.5s ;
+  }
+  div.bd{
+  background-color:green;
+  border:0px solid ;
+  border-radius: 50% ;
+  }
+  div p{
+  margin: auto;
+  padding: 10%;
+  color:yellow;
+  text-align:center;
+  text-shadow:1px 1px rgb(0,100,100);
+  }
+  </style>
+ </head>
+ <body>
+  <script type="text/javascript">
+  const NUMS = 6 ;
+  var tsBalls = [] ;
+  var sn = 0 ;
+  const S = ['韦静颖，20203014。好雨知时节，当春乃发生。随风潜入夜，润物细无声。野径云俱黑，江船火独明。晓看红湿处，花重锦官城。' , '单车欲问边，属国过居延。征蓬出汉塞，归雁入胡天。大漠孤烟直，长河落日圆。萧关逢候骑，都护在燕然。' , '客路青山外，行舟绿水前。潮平两岸阔，风正一帆悬。海日生残夜，江春入旧年。乡书何处达？归雁洛阳边。','城阙辅三秦，风烟望五津。与君离别意，同是宦游人。海内存知己，天涯若比邻。无为在歧路，儿女共沾巾。'] ; 
+  document.body.onmousemove = document.body.ontouchmove = function(){
+	  for (let ball of tsBalls){
+	  ball.setPositionDiv() ;
+	  }
+	  };
+    document.body.onclick = function(){
+		for(let ball of tsBalls){
+			ball.randPositionDiv() ;
+			}
+			};
+    document.body.ondblclick = function(){
+		console.log('double click');
+        for(let ball of tsBalls){
+            this.removeChild(ball.dom) ;
+        }
+        tsBalls = [] ;
+        sn === S.length -1 ? sn = 0 : sn++ ;
+        for(var i=0 ;i < S[sn].length ; i++){
+            var x0 = i % NUMS ;
+            var y0 = Math.floor ( i / NUMS ) ;
+            var ballObj = new Ball( x0 , y0 ) ;
+            ballObj.createDivDom(S[sn][i]) ;
+            ballObj.randPositionDiv() ;
+            tsBalls.push(ballObj) ;
+        }
+		};
+    var bodyWidth = window.innerWidth ;
+    var bodyHeight = window.innerHeight ;
+    document.body.style.width = bodyWidth + 'px';
+    document.body.style.height = bodyHeight + 'px' ;
+    var r = bodyWidth > bodyHeight ? bodyHeight / (NUMS*3/2) : bodyWidth / (NUMS*3/2) ;
+    for(var i=0 ;i < S[sn].length ; i++){
+        var x0 = i % NUMS ;
+        var y0 = Math.floor ( i / NUMS ) ;
+        var ballObj = new Ball( x0 , y0 ) ;
+        ballObj.createDivDom(S[sn][i]) ;
+        ballObj.randPositionDiv() ;
+        tsBalls.push(ballObj) ;
+    }
+    function Ball(x0 , y0){
+        this.x0 = x0 ;
+        this.y0 = y0 ;
+        this.dom = null ;
+        this.createDivDom = function(s){
+            var divDom = document.createElement('div') ;
+            var pDom = document.createElement('p') ;
+            pDom.textContent = s ;
+            pDom.style.fontSize = r/2 + 'px' ;
+            divDom.style.width = divDom.style.height = r + 'px' ;
+            if(this.x0 === 5 || this.x0 === 11 ){
+                divDom.className = 'bd' ;
+            }
+            divDom.appendChild(pDom) ;
+            document.body.appendChild(divDom) ;
+            this.dom = divDom ;
+			};
+        this.randPositionDiv = function(){
+			var x = Math.floor(Math.random() * bodyWidth ) ;
+            if(x >= bodyWidth - r){
+                x = bodyWidth - r ;
+            }
+            var y = Math.floor( Math.random() * bodyHeight );
+            if(y >= bodyHeight - r){
+                y = bodyHeight - r ;
+            }
+            this.dom.style.left = x + 'px' ;
+            this.dom.style.top = y + 'px' ;
+			} ;
+        this.setPositionDiv = function(){
+			var x = parseInt(this.x0) * r * 1.2 ;
+            var y = parseInt(this.y0) * r * 1.2 ;
+            this.dom.style.left = x + r + 'px' ;
+            this.dom.style.top = y + r + 'px' ;
+        } ;
+    };
+</script>
+ </body>
+</html>
