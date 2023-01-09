@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <script type="text/javascript">
+        function f() {
+            location.href="https://weijingying0115.github.io/test.html"
+        }
+    </script>
+ </head>
+ <body>
+  <button onclick="f()" type="button" class="but1"><a href="https://weijingying0115.github.io/test.html">点击进入</a></button>           
+ </body>
+</html>
